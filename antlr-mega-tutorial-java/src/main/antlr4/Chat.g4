@@ -6,7 +6,7 @@ grammar Chat;
 
 chat : line+ EOF ;
 
-line : name command message NEWLINE;
+line : name WHITESPACE command message NEWLINE;
 
 name : WORD ;
 
@@ -45,7 +45,7 @@ SHOUTS : S H O U T S;
 
 WORD : (LOWERCASE | UPPERCASE | '_')+ ;
 
-WHITESPACE : (' '|'\t') -> skip;
+WHITESPACE : (' ' | '\t');
 
 NEWLINE : ('\r'? '\n' | '\r')+;
 
