@@ -18,7 +18,7 @@ emoticon : ':' '-'? ')'
          | ':' '-'? '('
          ;
 
-link : '[' TEXT ']' '(' TEXT ')' ;
+link : TEXT TEXT ;
 
 color : '/' WORD '/' message '/' ;
 
@@ -49,4 +49,4 @@ WHITESPACE : (' '|'\t') -> skip;
 
 NEWLINE : ('\r'? '\n' | '\r')+;
 
-TEXT : ~[\])]+ ;
+TEXT : ('[' | '(') ~[\])]+ (']' | ')') ;
