@@ -6,9 +6,9 @@ grammar Chat;
 
 chat : line+ EOF ;
 
-line : name WHITESPACE command message NEWLINE;
+line : name command message NEWLINE;
 
-name : WORD ;
+name : WORD WHITESPACE;
 
 command : (SAYS | SHOUTS) ':' WHITESPACE ;
 
