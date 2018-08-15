@@ -43,8 +43,7 @@ SAYS : S A Y S ;
 
 SHOUTS : S H O U T S;
 
-TEXT : ~[\])]+ ;
-// TEXT : {_input.LA(-1) == '[' || _input.LA(-1) == '('}?   ;
+TEXT : {_input.LA(-1) == '[' || _input.LA(-1) == '('}?  ~[\])]+  ;
 
 WORD : (LOWERCASE | UPPERCASE | '_')+ ;
 
