@@ -1,8 +1,3 @@
-package midlevel;
-
-import beginner.ChatBaseListener;
-import beginner.ChatParser;
-
 public class MyChatListener extends ChatBaseListener {
 
     private final StringBuilder responseBuilder = new StringBuilder();
