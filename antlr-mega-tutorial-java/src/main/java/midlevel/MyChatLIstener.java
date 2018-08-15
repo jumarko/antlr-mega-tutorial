@@ -21,7 +21,7 @@ public class MyChatListener extends ChatBaseListener {
     public void exitName(ChatParser.NameContext ctx) {
         responseBuilder
                 .append(ctx.WORD().getText())
-                .append("<strong>");
+                .append("</strong>");
     }
 
     @Override
@@ -29,18 +29,22 @@ public class MyChatListener extends ChatBaseListener {
         final String emoticon = ctx.getText();
 
         if (":-)".equals(emoticon) || ":)".equals(emoticon)) {
-            responseBuilder.append("?");
+            responseBuilder.append(":)");
         } else if (":-(".equals(emoticon) || ":(".equals(emoticon)) {
-            responseBuilder.append("?");
+            responseBuilder.append(":(");
         }
     }
 
     @Override
     public void enterCommand(ChatParser.CommandContext ctx) {
         if (ctx.SAYS() != null) {
-            responseBuilder.append(ctx.SAYS().getText() + ":<p>");
+            responseBuilder
+                    .append(ctx.SAYS().getText())
+                    .append(":<p>");
         } else if (ctx.SHOUTS() != null) {
-            responseBuilder.append(ctx.getText() + ":<p style=\"text-transform:uppercase\">");
+            responseBuilder
+                    .append(ctx.SHOUTS().getText())
+                    .append(":<p style=\"text-transform:uppercase\">");
         }
     }
 
