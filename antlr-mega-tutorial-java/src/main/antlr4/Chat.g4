@@ -18,7 +18,7 @@ emoticon : ':' '-'? ')'
          | ':' '-'? '('
          ;
 
-link : '[' TEXT  ']' '(' TEXT ')';
+link : '[' LINKTEXT  ']' '(' LINKTEXT ')';
 
 color : '/' WORD '/' message '/' ;
 
@@ -43,7 +43,7 @@ SAYS : S A Y S ;
 
 SHOUTS : S H O U T S;
 
-TEXT : {_input.LA(-1) == '[' || _input.LA(-1) == '('}?  ~[\])]+  ;
+LINKTEXT : {_input.LA(-1) == '[' || _input.LA(-1) == '('}?  ~[\])]+  ;
 
 WORD : (LOWERCASE | UPPERCASE | '_')+ ;
 
