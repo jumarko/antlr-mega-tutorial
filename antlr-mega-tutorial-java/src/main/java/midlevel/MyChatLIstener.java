@@ -52,4 +52,23 @@ public class MyChatListener extends ChatBaseListener {
     public void exitLine(ChatParser.LineContext ctx) {
         responseBuilder.append("</p>");
     }
+
+    @Override
+    public void enterColor(ChatParser.ColorContext ctx) {
+        final String color = ctx.WORD().getText();
+        responseBuilder.append("<span style='color: ")
+                .append(color)
+                .append("';>");
+    }
+
+    @Override
+    public void exitColor(ChatParser.ColorContext ctx) {
+        responseBuilder.append("</span>");
+    }
+
+    @Override
+    public void exitMessage(ChatParser.MessageContext ctx) {
+        responseBuilder.append(ctx.getText());
+//        System.out.println("Message: " + ctx.getText());
+    }
 }
