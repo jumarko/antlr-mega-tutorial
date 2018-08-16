@@ -41,11 +41,17 @@ public class MarkupVisitor extends MarkupParserBaseVisitor<String> {
                 break;
             case "quote":
                 // TODO: check the attribute name is actually "author"?
-                final String attributeValue = ctx.attribute().STRING().getText();
-                // trim the leading and trailing quote
-                final String author = attributeValue.substring(1, attributeValue.length() - 1);
+                String author = null;
+                if (ctx.attribute() != null && "author".equals(ctx.attribute().ID().getText())) {
+                    final String attributeValue = ctx.attribute().STRING().getText();
+                    // trim the leading and trailing quote
+                    author = attributeValue.substring(1, attributeValue.length() - 1);
+                }
+
                 start = System.lineSeparator() + "> ";
-                end = System.lineSeparator() + "> -" + author;
+                if (author != null) {
+                    end = System.lineSeparator() + "> -" + author;
+                }
                 break;
         }
 

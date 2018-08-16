@@ -29,11 +29,19 @@ public class MarkupParserTest {
     }
 
     @Test
-    public void testValidTransform() {
+    public void testQuoteWithAuthor() {
         assertEquals("Markdown generated from BBCode different from the expected value.",
                 "I would like to *underline ** that ** *. Let's quote: \n" +
                         "> You're wrong! \n" +
                         "> -john",
                 transformCode("I would like to [u]underline [b] that [/b] [/u]. Let's quote: [quote author=\"john\"]You're wrong! [/quote]"));
+    }
+    
+    @Test
+    public void testQuoteWithoutAuthor() {
+        assertEquals("Markdown generated from BBCode different from the expected value.",
+                "I would like to *underline ** that ** *. Let's quote: \n" +
+                        "> You're wrong! ",
+                transformCode("I would like to [u]underline [b] that [/b] [/u]. Let's quote: [quote]You're wrong! [/quote]"));
     }
 }
