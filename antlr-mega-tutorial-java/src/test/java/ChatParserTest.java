@@ -1,12 +1,9 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-import org.antlr.v4.runtime.BaseErrorListener;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonToken;
 import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.RecognitionException;
-import org.antlr.v4.runtime.Recognizer;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.junit.Test;
 
@@ -14,21 +11,6 @@ import org.junit.Test;
 public class ChatParserTest {
 
     private TestErrorListener errorListener;
-
-    public static class TestErrorListener extends BaseErrorListener {
-
-            private Object offendingSymbol;
-
-            @Override
-            public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol, int line, int charPositionInLine, String msg, RecognitionException e) {
-                this.offendingSymbol = offendingSymbol;
-                System.out.println("SYNTAX ERROR: " + offendingSymbol);
-            }
-
-            public Object getOffendingSymbol() {
-                return offendingSymbol;
-            }
-    }
 
 
     private ChatParser setupParser(String text) {

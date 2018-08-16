@@ -1,11 +1,10 @@
+import java.util.List;
 
 public class MarkupVisitor extends MarkupParserBaseVisitor<String> {
 
     @Override
     public String visitFile(MarkupParser.FileContext ctx) {
-        visitChildren(ctx);
-        System.out.println("");
-        return null;
+        return visitElements(ctx.element());
     }
 
     @Override
@@ -13,17 +12,18 @@ public class MarkupVisitor extends MarkupParserBaseVisitor<String> {
         return ctx.getText();
     }
 
+
     @Override
     public String visitElement(MarkupParser.ElementContext ctx) {
         if (ctx.parent instanceof MarkupParser.FileContext) {
             if (ctx.content() != null) {
-                System.out.print(visitContent(ctx.content()));
+                return visitContent(ctx.content());
             } else if (ctx.tag() != null) {
-                System.out.print(visitTag(ctx.tag()));
+                return visitTag(ctx.tag());
             }
         }
 
-        return null;
+        throw new IllegalStateException("Unexpected element: " + ctx.getText());
     }
 
     @Override
@@ -50,15 +50,21 @@ public class MarkupVisitor extends MarkupParserBaseVisitor<String> {
         }
 
         text.append(start);
-        for (MarkupParser.ElementContext element : ctx.element()) {
+        text.append(visitElements(ctx.element()));
+        text.append(end);
+
+        return text.toString();
+    }
+
+    private String visitElements(List<MarkupParser.ElementContext> elements) {
+        final StringBuilder text = new StringBuilder();
+        for (MarkupParser.ElementContext element : elements) {
             if (element.content() != null) {
                 text.append(visitContent(element.content()));
             } else if (element.tag() != null) {
                 text.append(visitTag(element.tag()));
-            } 
+            }
         }
-        text.append(end);
-
         return text.toString();
     }
 }

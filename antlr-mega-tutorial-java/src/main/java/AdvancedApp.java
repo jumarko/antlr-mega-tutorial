@@ -14,6 +14,6 @@ public class AdvancedApp {
         final MarkupParser markupParser = new MarkupParser(new CommonTokenStream(markupLexer));
         final MarkupParser.FileContext fileContext = markupParser.file();
         final MarkupVisitor markupVisitor = new MarkupVisitor();
-        markupVisitor.visit(fileContext);
+        System.out.println(markupVisitor.visit(fileContext));
     }
 }
