@@ -2,7 +2,7 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CodePointCharStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 
-public class AdvancedApp {
+public class MarkupApp {
 
     public static void main(String[] args) {
         final CodePointCharStream noQuote =
