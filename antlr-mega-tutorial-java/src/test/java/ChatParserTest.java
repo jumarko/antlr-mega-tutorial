@@ -12,8 +12,7 @@ public class ChatParserTest {
 
     private TestErrorListener errorListener;
 
-
-    private ChatParser setupParser(String text) {
+        private ChatParser setupParser(String text) {
         final ChatLexer chatLexer = new ChatLexer(CharStreams.fromString(text));
         final CommonTokenStream tokens = new CommonTokenStream(chatLexer);
         final ChatParser chatParser = new ChatParser(tokens);
@@ -26,10 +25,11 @@ public class ChatParserTest {
         return chatParser;
     }
 
-    private void checkNameRule(String input) {
+    private ChatParser checkNameRule(String input) {
         final ChatParser parser = setupParser(input);
         final ChatParser.NameContext tree = parser.name();
         ParseTreeWalker.DEFAULT.walk(new MyChatListener(), tree);
+        return parser;
     }
 
     @Test
@@ -41,7 +41,8 @@ public class ChatParserTest {
 
     @Test
     public void testInvalidName() {
-        checkNameRule("Joh-");
+        final ChatParser chatParser = checkNameRule("Joh-");
+        assertEquals(1, chatParser.getNumberOfSyntaxErrors());
         assertEquals("Expected error, but found no errors",
                 "-", ((CommonToken) errorListener.getOffendingSymbol()).getText());
     }
